@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: View files
-        run: ls -a
       - name: Test with Maven
-        run: mvn test
+        run: |
+          cd homework01
+          mvn test
