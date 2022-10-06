@@ -5,12 +5,10 @@ on:
   pull_request:
     branches: [ "homework01" ]
 
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,5 +18,9 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Checkout repo
+        run: actions/checkout@v1
+      - name: View files
+        run: ls -a
       - name: Test with Maven
         run: mvn test
