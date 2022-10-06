@@ -1,0 +1,26 @@
+name: test_homework01
+on:
+  push:
+    branches: [ "homework01" ]
+  pull_request:
+    branches: [ "homework01" ]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Checkout repo
+        run: actions/checkout@v1
+      - name: View files
+        run: ls -a
+      - name: Test with Maven
+        run: mvn test
