@@ -3,7 +3,7 @@ on:
   push:
     branches: [ "homework01" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "homework01" ]
   
   
   # Allows you to run this workflow manually from the Actions tab
@@ -21,4 +21,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Test with Maven
-        run: mvn test
+        run: |
+              pwd
+              ls -a
+              mvn test
