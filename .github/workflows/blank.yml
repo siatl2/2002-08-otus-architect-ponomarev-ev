@@ -20,5 +20,5 @@ jobs:
           distribution: 'adopt'
       - name: Test with Maven
         run: |
-          cd homework01
+          cd homework02
           mvn test
