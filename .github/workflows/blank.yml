@@ -20,6 +20,6 @@ jobs:
           distribution: 'adopt'
       - name: Test with Maven
         run: |
-          dir_homework=$(ls -d */)
+          dir_homework=$(find . -name "homework*")
           cd $dir_homework
           mvn test
