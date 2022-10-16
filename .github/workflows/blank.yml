@@ -18,8 +18,11 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: show dir homeworks
+        run: 
+          find . -name "homework*" -type d
       - name: Test with Maven
         run: |
-          dir_homework=$(find . -name "homework*")
+          dir_homework=$(find . -name "homework*" -type d)
           cd $dir_homework
           mvn test
