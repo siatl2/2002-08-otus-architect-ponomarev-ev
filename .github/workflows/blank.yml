@@ -20,9 +20,9 @@ jobs:
           distribution: 'adopt'
       - name: show dir homeworks
         run: 
-          find . -name "homework*" -type d
+          find . -maxdepth 1 -name "homework*" -type d
       - name: Test with Maven
         run: |
-          dir_homework=$(find . -name "homework*" -type d)
+          dir_homework=$(find . -maxdepth 1 -name "homework*" -type d)
           cd $dir_homework
           mvn test
