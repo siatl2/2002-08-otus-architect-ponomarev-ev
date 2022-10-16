@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: test_homework02_CI
+name: test_homework_CI
 
 on:
   pull_request:
@@ -20,5 +20,6 @@ jobs:
           distribution: 'adopt'
       - name: Test with Maven
         run: |
-          cd homework02
+          dir_homework = $(ls -d */)
+          cd $dir_homework
           mvn test
