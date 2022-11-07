@@ -26,5 +26,5 @@ jobs:
       - name: Test with Maven
         run: |
           dir_homework=$(find . -maxdepth 1 -name "homework??" -type d)
-          cd $dir_homework
+          cd $GITHUB_HEAD_REF
           mvn test
