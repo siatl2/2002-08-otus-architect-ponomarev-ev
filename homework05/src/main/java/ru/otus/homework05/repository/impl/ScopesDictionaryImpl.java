@@ -1,6 +1,6 @@
 package ru.otus.homework05.repository.impl;
 
-import ru.otus.homework05.repository.CommandHandler;
+import ru.otus.homework05.repository.IoCDictionary;
 import ru.otus.homework05.repository.ScopesDictionary;
 import ru.otus.homework05.service.Initializer;
 import ru.otus.homework05.service.impl.InitializerCommandHandler;
@@ -8,13 +8,13 @@ import ru.otus.homework05.service.impl.InitializerCommandHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ScopesDictionaryImpl implements ScopesDictionary<CommandHandler> {
+public class ScopesDictionaryImpl implements ScopesDictionary<IoCDictionary> {
 
     private static final String SCOPE_NOT_EXIST = "Область видимости не существует";
     private static ScopesDictionaryImpl scopesDictionary;
-    private Map<String, CommandHandler> mapHandler;
-    private Map<String, Thread> mapThead;
-    private static CommandHandler currentScope;
+    private final Map<String, IoCDictionary> mapHandler;
+    private final Map<String, Thread> mapThead;
+    private static IoCDictionary currentScope;
 
     private ScopesDictionaryImpl(){
         mapHandler = new HashMap<>();
@@ -30,24 +30,23 @@ public class ScopesDictionaryImpl implements ScopesDictionary<CommandHandler> {
     }
 
     @Override
-    public CommandHandler getCurrentScope() {
+    public IoCDictionary getCurrentScope() {
         return currentScope;
     }
 
     @Override
     public void createScope(String scopeName) {
-        CommandHandler commandHandler = new CommandHandlerImpl();
+        IoCDictionary ioCDictionary = new IoCDictionaryImpl();
 
-        Thread thread = new Thread(commandHandler);
+        Thread thread = new Thread(ioCDictionary);
         thread.start();
 
-        mapHandler.put(scopeName, commandHandler);
+        mapHandler.put(scopeName, ioCDictionary);
         mapThead.put(scopeName, thread);
 
-        Initializer initializerCommandHandler = new InitializerCommandHandler();
-        initializerCommandHandler.initialize(commandHandler);
+        initializeCommandHandlerInScope(ioCDictionary);
 
-        currentScope = commandHandler;
+        currentScope = ioCDictionary;
     }
 
     @Override
@@ -57,5 +56,10 @@ public class ScopesDictionaryImpl implements ScopesDictionary<CommandHandler> {
         }
 
         currentScope = mapHandler.get(toScopeName);
+    }
+
+    private void initializeCommandHandlerInScope(IoCDictionary ioCDictionary){
+        Initializer initializerCommandHandler = new InitializerCommandHandler();
+        initializerCommandHandler.initialize(ioCDictionary);
     }
 }

@@ -1,27 +1,20 @@
 package ru.otus.homework05.service.impl;
 
-import ru.otus.homework05.repository.CommandHandler;
+import ru.otus.homework05.repository.IoCDictionary;
+import ru.otus.homework05.service.Command;
 import ru.otus.homework05.service.Initializer;
 
-import java.util.List;
-
-public class InitializerCommandHandler implements Initializer<CommandHandler> {
+public class InitializerCommandHandler implements Initializer<IoCDictionary<Command>> {
     @Override
-    public void initialize(CommandHandler handler) {
+    public void initialize(IoCDictionary<Command> handler) {
         handler.add("IoC.Register",
-                (args) ->{
-                    return new RegisterCommand((List)args);
-                });
+                RegisterCommand::new);
 
         handler.add("Scopes.New",
-                (args) ->{
-                    return new CreateScopeCommand((List)args);
-                });
+                CreateScopeCommand::new);
 
         handler.add("Scopes.Current",
-                (args) ->{
-                    return new ChangeScopeCommand((List)args);
-                });
+                ChangeScopeCommand::new);
 
     }
 }
