@@ -25,18 +25,13 @@ public class LoadAdapterCommand implements Command {
 
         try {
             File file = new File(PATH_CLASSES);
-            System.out.println("PATH_CLASSES=" + PATH_CLASSES);
-            System.out.println("FILE_EXISTS=" + file.exists());
 
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};
-            System.out.println("urls complete, url=" + url.getPath());
 
-            ClassLoader cl = this.getClass().getClassLoader();
-            System.out.println("CLASS_LOADER=" + cl.getName());
+            ClassLoader cl = new URLClassLoader(urls);
 
             returnClass = cl.loadClass(className);
-            System.out.println("RETURN_CLASS=" + returnClass.getSimpleName());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
