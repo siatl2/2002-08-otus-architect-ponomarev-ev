@@ -32,7 +32,7 @@ public class LoadAdapterCommand implements Command {
             URL[] urls = new URL[]{url};
             System.out.println("urls complete, url=" + url.getPath());
 
-            ClassLoader cl = new URLClassLoader(urls);
+            ClassLoader cl = this.getClass().getClassLoader();
             System.out.println("CLASS_LOADER=" + cl.getName());
 
             returnClass = cl.loadClass(className);
