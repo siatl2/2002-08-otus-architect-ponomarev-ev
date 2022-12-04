@@ -16,7 +16,6 @@ public class LoadAdapterCommand implements Command {
 
     @Override
     public void execute() {
-        // ru.otus.homework06.adapter.impl.MovableAdapter
         String className = String.valueOf(classNames[0]);
         System.out.println("CLASS_NAME=" + className);
         Class returnClass = null;
@@ -28,6 +27,7 @@ public class LoadAdapterCommand implements Command {
             ClassLoader cl = new URLClassLoader(urls);
 
             returnClass = cl.loadClass(className);
+            System.out.println("RETURN_CLASS=" + returnClass.getSimpleName());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

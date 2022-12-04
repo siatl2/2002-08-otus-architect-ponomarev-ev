@@ -107,8 +107,8 @@ public class GetAdapter {
                         ((Loadable) loadable).getClasses()
                 }
         ).execute();
+        System.out.println("CREATE AND REGITER COMPLETE");
 
-        //return null;
         return ((GetAdapter) (IoC.resolve(
                 "Adapter",
                 new Object[]{
